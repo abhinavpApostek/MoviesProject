@@ -1,13 +1,16 @@
-package com.example.abhinav.movies;
+package com.example.abhinav.movies.adapters;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.abhinav.movie.R;
+import com.example.abhinav.movies.LoadItem;
+import com.example.abhinav.movies.MainActivity;
+import com.example.abhinav.movies.OpenMovieActivity;
+import com.example.abhinav.movies.model.Movie;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -18,18 +21,18 @@ import java.util.List;
 
 public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapter.ViewHolder> {
 
-    List<Movies> moviesList;
+    List<Movie> movieList;
     LoadItem loadItem;
     private boolean isLoadingAdded = false;
     private static final int ITEM = 0;
     private static final int LOADING = 1;
-    public RecyclerGridAdapter(List<Movies> moviesList,LoadItem loadItem,OpenMovieActivity openMovieActivity) {
-        this.moviesList=moviesList;
+    public RecyclerGridAdapter(List<Movie> movieList, LoadItem loadItem, OpenMovieActivity openMovieActivity) {
+        this.movieList = movieList;
         this.loadItem=loadItem;
     }
     @Override
     public RecyclerGridAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.v("oncreateholder",Integer.toString(viewType));
+       // Log.v("oncreateholder",Integer.toString(viewType));
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v;
         if(viewType==0) {
@@ -47,20 +50,20 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
 
     @Override
     public int getItemViewType(int position) {
-        Log.v("getitemviewtype",Integer.toString(position));
-        return (position == moviesList.size() - 1 && isLoadingAdded) ? LOADING : ITEM;
+        //Log.v("getitemviewtype",Integer.toString(position));
+        return (position == movieList.size() - 1 && isLoadingAdded) ? LOADING : ITEM;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerGridAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerGridAdapter.ViewHolder holder, final int position) {
 
-        Log.v("onbindholder",Integer.toString(position));
+       // Log.v("onbindholder",Integer.toString(position));
         if(getItemViewType(position)==0) {
-            Picasso.with((MainActivity) loadItem).load("https://image.tmdb.org/t/p/original" + moviesList.get(position).getPoster_path()).resize(200,300).into(holder.imageView);
+            Picasso.with((MainActivity) loadItem).load("https://image.tmdb.org/t/p/original" + movieList.get(position).getPoster_path()).resize(200,300).into(holder.imageView);
             holder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    ((MainActivity) loadItem).openActivity(movieList.get(position));
                 }
             });
         }
@@ -69,8 +72,8 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
 
     @Override
     public int getItemCount() {
-        Log.v("getItemCount",Integer.toString(moviesList.size()));
-        return moviesList.size();
+       // Log.v("getItemCount",Integer.toString(movieList.size()));
+        return movieList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -82,32 +85,32 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
         }
     }
 
-    private void add(Movies mc) {
-        moviesList.add(mc);
-        notifyItemInserted(moviesList.size() - 1);
+    private void add(Movie mc) {
+        movieList.add(mc);
+        notifyItemInserted(movieList.size() - 1);
     }
 
-    public void addAll(List<Movies> mcList) {
-        for (Movies mc : mcList) {
+    public void addAll(List<Movie> mcList) {
+        for (Movie mc : mcList) {
             add(mc);
         }
     }
     public void addLoadingFooter() {
         isLoadingAdded = true;
-        add(new Movies());
+        add(new Movie());
     }
     public void removeLoadingFooter() {
         isLoadingAdded = false;
 
-        int position = moviesList.size() - 1;
-        Movies item = getItem(position);
+        int position = movieList.size() - 1;
+        Movie item = getItem(position);
 
         if (item != null) {
-            moviesList.remove(position);
+            movieList.remove(position);
             notifyItemRemoved(position);
         }
     }
-    public Movies getItem(int position) {
-        return moviesList.get(position);
+    public Movie getItem(int position) {
+        return movieList.get(position);
     }
 }

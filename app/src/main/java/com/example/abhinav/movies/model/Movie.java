@@ -1,4 +1,4 @@
-package com.example.abhinav.movies;
+package com.example.abhinav.movies.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,18 +9,18 @@ import com.google.gson.annotations.SerializedName;
  * Created by Abhinav on 9/18/2017.
  */
 
-class Movies implements Parcelable {
+public class Movie implements Parcelable {
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public Movies createFromParcel(Parcel in) {
-            return new Movies(in);
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
         }
 
-        public Movies[] newArray(int size) {
-            return new Movies[size];
+        public Movie[] newArray(int size) {
+            return new Movie[size];
         }
     };
-    public Movies() {
+    public Movie() {
 
     }
 
@@ -31,11 +31,13 @@ class Movies implements Parcelable {
     @SerializedName("poster_path")
     String poster_path;
     @SerializedName("vote_average")
-    int voteAvg;
+    double voteAvg;
     @SerializedName("overview")
     String overview;
     @SerializedName("release_date")
     String releaseDate;
+    @SerializedName("runtime")
+    int runtime;
     public String getTitle() {
         return title;
     }
@@ -60,7 +62,7 @@ class Movies implements Parcelable {
         this.poster_path = poster_path;
     }
 
-    public int getVoteAvg() {
+    public double getVoteAvg() {
         return voteAvg;
     }
 
@@ -84,25 +86,35 @@ class Movies implements Parcelable {
         this.releaseDate = releaseDate;
     }
 
+    public int getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(int runtime) {
+        this.runtime = runtime;
+    }
+
     @Override
     public int describeContents() {
         return 0;
     }
-    public Movies (Parcel in){
+    public Movie(Parcel in){
         this.title = in.readString();
         this.id = in.readInt();
         this.poster_path =  in.readString();
-        this.voteAvg = in.readInt();
+        this.voteAvg = in.readDouble();
         this.overview=in.readString();
         this.releaseDate=in.readString();
+        this.runtime=in.readInt();
     }
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getTitle());
         dest.writeInt(getId());
         dest.writeString(getPoster_path());
-        dest.writeInt(getVoteAvg());
+        dest.writeDouble(getVoteAvg());
         dest.writeString(getOverview());
         dest.writeString(getReleaseDate());
+        dest.writeInt(getRuntime());
     }
 }

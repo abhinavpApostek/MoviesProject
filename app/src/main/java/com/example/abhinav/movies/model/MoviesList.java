@@ -1,4 +1,4 @@
-package com.example.abhinav.movies;
+package com.example.abhinav.movies.model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -8,13 +8,13 @@ import java.util.List;
  * Created by Abhinav on 9/18/2017.
  */
 
-public class MoviePage {
+public class MoviesList {
 
     @SerializedName("page")
     int page;
 
     @SerializedName("results")
-    List<Movies> movies;
+    List<Movie> movies;
 
     public int getPage() {
         return page;
@@ -24,11 +24,11 @@ public class MoviePage {
         this.page = page;
     }
 
-    public List<Movies> getMovies() {
+    public List<Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(List<Movies> movies) {
+    public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
 }

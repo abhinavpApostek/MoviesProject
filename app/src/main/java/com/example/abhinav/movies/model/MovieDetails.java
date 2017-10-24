@@ -1,4 +1,4 @@
-package com.example.abhinav.movies;
+package com.example.abhinav.movies.model;
 
 import com.google.gson.annotations.SerializedName;
 

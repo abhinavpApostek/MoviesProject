@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -25,25 +26,36 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
+            android:ellipsize="marquee"
+            android:focusableInTouchMode="true"
             android:gravity="center_vertical"
-            android:text="TextView" />
+            android:marqueeRepeatLimit="marquee_forever"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="TextView"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:gravity="center_vertical"
+            android:text="TextView"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/button"
@@ -54,32 +66,49 @@
             android:text="Mark As Favourite"
             android:textSize="10dp"/>
     </LinearLayout>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+
+    <View
+        android:id="@+id/view"
         android:layout_below="@+id/imageView2"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="7dp"
-        android:id="@+id/scrollView2">
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="5dp"
+        android:background="#000000"/>
+
         <TextView
+            android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="4"
-           />
-    </ScrollView>
+            android:layout_below="@+id/view"
+            android:layout_marginTop="4dp"
+            android:textSize="16sp"
+            android:padding="5dp" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="3dp"
+        android:background="#000000"
+        android:layout_below="@+id/textView5"/>
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/scrollView2"
-        android:text="Trailers" />
+        android:layout_below="@+id/view2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:text="Trailers"
+        android:textSize="20sp" />
+
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
         android:layout_alignParentStart="true"
-        android:id="@+id/recyclerView2" />
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="5dp" />
 
 
 </RelativeLayout>

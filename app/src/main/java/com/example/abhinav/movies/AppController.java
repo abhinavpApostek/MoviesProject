@@ -18,8 +18,6 @@ public class AppController extends Application {
             .getSimpleName();
 
     private RequestQueue mRequestQueue;
-    private ImageLoader mImageLoader;
-
     private static AppController mInstance;
 
     @Override
